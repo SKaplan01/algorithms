@@ -26,3 +26,5 @@ class Queue {
     return this._list.head === null;
   }
 }
+
+module.exports = { Queue };
