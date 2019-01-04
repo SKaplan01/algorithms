@@ -1,12 +1,37 @@
-//to add a level to the tree
+//https://leetcode.com/problems/generate-parentheses/
 
-//start at node
-//does it have a left?
-//YES --> put it on the stack and go left
-//NO left...
-//is it a left? then addChildrenToLeft (add a left and children)
-//Does it have children?
-//YES--> add to stack, iterate through children and recurse
+//PROBLEM: Given n pairs of parentheses, write a function to generate
+//all combinations of well-formed parentheses.
+
+//nodes to keep track of valid combinations of pairs of parenthesis
+//left most children in the tree grow as binary (adding parens to end and to outside) '()()' --> '()()()' and '(()())'
+//all other nodes have 3 children (adding parens to beginning, end, and to outside) '(())' --> '()(())' '(())()' and '((()))'
+class Node {
+  constructor(val, type, children = [], left = null) {
+    this.val = val;
+    this.type = type;
+    this.children = children;
+    this.left = left;
+  }
+
+  //adds children to a left parensTree node and pushes values for new children onto valuesAdded
+  addChildrenToLeft(valuesAdded) {
+    this.left = new Node(this.val + '()', 'left');
+    valuesAdded.push(this.val + '()');
+    this.children.push(new Node('(' + this.val + ')', 'right'));
+    valuesAdded.push('(' + this.val + ')');
+  }
+
+  //adds children to a (non-left)parensTree node and pushes values for new children onto valuesAdded
+  addChildren(valuesAdded) {
+    this.children.push(new Node('()' + this.val, 'right'));
+    valuesAdded.push('()' + this.val);
+    this.children.push(new Node('(' + this.val + ')', 'right'));
+    valuesAdded.push('(' + this.val + ')');
+    this.children.push(new Node(this.val + '()', 'right'));
+    valuesAdded.push(this.val + '()');
+  }
+}
 
 //making an instance of a parens tree always starts with a head node with value of '()'
 class parensTree {
@@ -15,6 +40,8 @@ class parensTree {
   }
 
   //adds a level to a parensTree and returns a list of the values added
+  //a "level" --> child nodes for all possible valid combionations of parenthesis
+  //when adding one additional pair of parens to a string of pairs of parens
   addLevel() {
     let valuesAdded = [];
 
@@ -44,40 +71,16 @@ class parensTree {
   }
 }
 
-class Node {
-  constructor(val, type, children = [], left = null) {
-    this.val = val;
-    this.type = type;
-    this.children = children;
-    this.left = left;
-  }
-
-  //adds children to a left parensTree node and pushes values for new children onto valuesAdded
-  addChildrenToLeft(valuesAdded) {
-    this.left = new Node(this.val + '()', 'left');
-    valuesAdded.push(this.val + '()');
-    this.children.push(new Node('(' + this.val + ')', 'right'));
-    valuesAdded.push('(' + this.val + ')');
-  }
-
-  //adds children to a parensTree node and pushes values for new children onto valuesAdded
-  addChildren(valuesAdded) {
-    this.children.push(new Node('()' + this.val, 'right'));
-    valuesAdded.push('()' + this.val);
-    this.children.push(new Node('(' + this.val + ')', 'right'));
-    valuesAdded.push('(' + this.val + ')');
-    this.children.push(new Node(this.val + '()', 'right'));
-    valuesAdded.push(this.val + '()');
-  }
-}
-
 var generateParenthesis = function(n) {
   let parens = new parensTree();
-  for (let i = 0; i < n - 2; i++) {
-    parens.addLevel();
+  let result = ['()'];
+  for (let i = 0; i < n - 1; i++) {
+    result = parens.addLevel();
   }
-  let result = parens.addLevel();
   return result;
 };
 
 console.log(generateParenthesis(4));
+
+//Not the most efficient solution because you "re-traverse"
+//all previous levels of the tree when you add a new level
