@@ -3,6 +3,7 @@ function countZeroes(nums) {
   let right = nums.length - 1;
   let mid;
   let foundLastOne = false;
+
   //find the index of the last 1 using binary search
   while (left <= right) {
     mid = left + Math.floor((right - left) / 2);
