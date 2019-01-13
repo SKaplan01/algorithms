@@ -244,4 +244,37 @@ function findNodeGreaterX(bTree, x) {
   }
 }
 
-console.log(findNodeGreaterX(binaryInts, 2));
+// console.log(findNodeGreaterX(binaryInts, 2));
+
+let node2 = new NodeBinaryTree(1);
+let binaryInts2 = new Tree(node2);
+binaryInts2.root.appendLeft(3);
+binaryInts2.root.appendRight(5);
+binaryInts2.root.right.appendLeft(4);
+binaryInts2.root.right.appendRight(-1);
+binaryInts2.root.left.appendLeft(2);
+binaryInts2.root.left.appendRight(-2);
+
+//use DFS to find a value in binary tree
+//return -1 if val does not exist
+function findNodeInBinaryTree(node, val, result = -1) {
+  if (node.val === val) {
+    result = node;
+    return result;
+  }
+  if (node.left) {
+    result = findNodeInBinaryTree(node.left, val, result);
+    if (result !== -1) return result;
+  }
+  if (node.right) {
+    result = findNodeInBinaryTree(node.right, val, result);
+    if (result !== -1) return result;
+  }
+  return -1;
+}
+
+// console.log(findNodeInBinaryTree(node2, -1));
+
+module.exports = {
+  NodeBinaryTree
+};
