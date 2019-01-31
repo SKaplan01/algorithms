@@ -89,6 +89,31 @@ class BinarySearchTree {
     }
     return;
   }
+
+  findDepth(root) {
+    let queue = new Queue();
+    queue.enqueue([root, 0]);
+    let depth = 0;
+    while (!queue.isEmpty()) {
+      let curr = queue.dequeue();
+      depth = curr[1];
+      if (curr[0].left) {
+        queue.enqueue([curr[0].left, depth + 1]);
+      }
+      if (curr[0].right) {
+        queue.enqueue([curr[0].right, depth + 1]);
+      }
+    }
+    return depth;
+  }
 }
+
+let tree = new BinarySearchTree(10);
+tree.insert(3);
+tree.insert(-3);
+tree.insert(6);
+tree.insert(12);
+tree.insert(11);
+console.log(findDepth(tree));
 
 module.exports = { BinarySearchTree, NodeBinarySearch };

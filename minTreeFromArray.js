@@ -4,7 +4,7 @@
 //create a binary search Tree with minimal height
 
 class Node {
-  constructor(val, left = null, right = null) {
+  constructor(val = null, left = null, right = null) {
     this.val = val;
     this.left = left;
     this.right = right;
@@ -59,5 +59,21 @@ function createMinBinaryTree(array) {
 // let tree = new BinaryTree();
 // tree.insertNode(7);
 // tree.insertNode(10);
-let tree = createMinBinaryTree([1, 3, 8, 9, 10, 14]);
-console.log(tree);
+// let tree = createMinBinaryTree([1, 3, 8, 9, 10, 14]);
+// console.log(tree);
+
+//given a sorted array, returns a binary search tree with min height
+//more efficient than fn above
+function makeBST(arr, min = 0, max = arr.length - 1, node = new Node()) {
+  if (max < min) {
+    return null;
+  }
+  let mid = min + Math.floor((max - min) / 2);
+  node.val = arr[mid];
+  node.left = makeBST(arr, min, mid - 1);
+  node.right = makeBST(arr, mid + 1, max);
+  return node;
+}
+
+let tree2 = makeBST([-3, 1, 4, 7, 10, 13, 17]);
+console.log(tree2);

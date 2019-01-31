@@ -275,6 +275,43 @@ function findNodeInBinaryTree(node, val, result = -1) {
 
 // console.log(findNodeInBinaryTree(node2, -1));
 
+//Add all nodes in n-ary tree to an array using DFS
+
+function listAllNodes(root, nodes = []) {
+  nodes.push(root.val);
+  for (let i = 0; i < root.children.length; i++) {
+    listAllNodes(root.children[i], nodes);
+  }
+  return nodes;
+}
+
+let rootInt2 = new Node(10);
+
+rootInt2.children.push(new Node(7));
+rootInt2.children.push(new Node(20));
+rootInt2.children[0].children.push(new Node(3));
+rootInt2.children[0].children.push(new Node(8));
+rootInt2.children[0].children[0].children.push(new Node(1));
+rootInt2.children[1].children.push(new Node(19));
+rootInt2.children[1].children.push(new Node(24));
+
+console.log(listAllNodes(rootInt2));
+
+//Add all nodes in n-ary tree to an array using DFS (in-order if sorted like a binary tree)
+
+function listAllNodesInOrder(root, nodes = []) {
+  if (root.children[0]) {
+    listAllNodesInOrder(root.children[0], nodes);
+  }
+  nodes.push(root.val);
+  if (root.children[1]) {
+    listAllNodesInOrder(root.children[1], nodes);
+  }
+  return nodes;
+}
+
+console.log(listAllNodesInOrder(rootInt2));
+
 module.exports = {
   NodeBinaryTree
 };
