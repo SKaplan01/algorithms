@@ -295,7 +295,7 @@ rootInt2.children[0].children[0].children.push(new Node(1));
 rootInt2.children[1].children.push(new Node(19));
 rootInt2.children[1].children.push(new Node(24));
 
-console.log(listAllNodes(rootInt2));
+// console.log(listAllNodes(rootInt2));
 
 //Add all nodes in n-ary tree to an array using DFS (in-order if sorted like a binary tree)
 
@@ -310,7 +310,7 @@ function listAllNodesInOrder(root, nodes = []) {
   return nodes;
 }
 
-console.log(listAllNodesInOrder(rootInt2));
+// console.log(listAllNodesInOrder(rootInt2));
 
 module.exports = {
   NodeBinaryTree
