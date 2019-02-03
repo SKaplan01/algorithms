@@ -1,3 +1,5 @@
+//Pramp question with recursion
+
 //Given a dictionary dict, write a function flattenDictionary
 //that returns a flattened version of it .
 function flattenDictionary(dict, obj = {}, key = '') {
