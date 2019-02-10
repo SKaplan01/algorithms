@@ -40,3 +40,6 @@ let root2 = null;
 console.log(validateBST(root2)); //true
 let root3 = new NodeBinaryTree(3);
 console.log(validateBST(root3)); //true
+
+//O(N) time because must visit every node
+//O(LogN) space for a balanced tree bc stack has calls for depth of tree
