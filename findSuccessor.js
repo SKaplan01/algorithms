@@ -47,7 +47,7 @@ function findLeftLeaf(node) {
 
 function findGreaterParent(node) {
   let curr = node.parent;
-  while (curr.val < node.val) {
+  while (curr && curr.val < node.val) {
     curr = curr.parent;
   }
   return curr;
@@ -62,4 +62,4 @@ function findSuccessor(root, val) {
   }
 }
 
-console.log(findSuccessor(root, 10));
+console.log(findSuccessor(root, 11));
