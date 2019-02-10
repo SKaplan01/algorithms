@@ -63,3 +63,7 @@ function findSuccessor(root, val) {
 }
 
 console.log(findSuccessor(root, 11));
+
+//O(N) time bc must check all nodes (to find)
+//if node already found, then O(Log N) bc at most must check 1 complete branch (to depth)
+//O(1) space
