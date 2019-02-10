@@ -12,6 +12,7 @@ root.right.appendRight(10);
 // console.log(root);
 
 function validateBST(root, min = -Infinity, max = Infinity) {
+  if (!root) return true;
   if (root.val < min || root.val > max) {
     return false;
   }
@@ -34,3 +35,8 @@ function validateBST(root, min = -Infinity, max = Infinity) {
 }
 
 console.log(validateBST(root)); //false
+let root2 = null;
+
+console.log(validateBST(root2)); //true
+let root3 = new NodeBinaryTree(3);
+console.log(validateBST(root3)); //true
